@@ -1,0 +1,2 @@
+bitcash
+PyQt5
