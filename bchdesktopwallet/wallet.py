@@ -8,6 +8,7 @@ from bchdesktopwallet.receivetransactionwidget import ReceiveTransactionWidget
 
 APPLICATION_NAME = "BCH Desktop Wallet"
 
+
 class BCHDesktopWallet(QWidget):
     def __init__(self):
         super().__init__()
@@ -16,15 +17,19 @@ class BCHDesktopWallet(QWidget):
 
     def init_ui(self):
         # Create widgets
-        self.label = QLabel('Bitcoin Cash Desktop Wallet')
-        self.manage_wallets_button = QPushButton('Manage Wallets')
+        self.label = QLabel("Bitcoin Cash Desktop Wallet")
+        self.manage_wallets_button = QPushButton("Manage Wallets")
         self.manage_wallets_button.clicked.connect(self.manage_wallets_button_clicked)
-        self.send_transaction_button = QPushButton('Send Transaction')
-        self.send_transaction_button.clicked.connect(self.send_transaction_button_clicked)
-        self.view_balances_button = QPushButton('View Balances')
+        self.send_transaction_button = QPushButton("Send Transaction")
+        self.send_transaction_button.clicked.connect(
+            self.send_transaction_button_clicked
+        )
+        self.view_balances_button = QPushButton("View Balances")
         self.view_balances_button.clicked.connect(self.view_balances_button_clicked)
-        self.receive_transaction_button = QPushButton('Receive Transaction')
-        self.receive_transaction_button.clicked.connect(self.receive_transaction_button_clicked)
+        self.receive_transaction_button = QPushButton("Receive Transaction")
+        self.receive_transaction_button.clicked.connect(
+            self.receive_transaction_button_clicked
+        )
 
         # Create layout
         layout = QVBoxLayout()
@@ -39,7 +44,9 @@ class BCHDesktopWallet(QWidget):
 
         # Set window properties
         self.setWindowTitle(APPLICATION_NAME)
-        self.setGeometry(100, 100, 400, 200)  # Set window dimensions (x, y, width, height)
+        self.setGeometry(
+            100, 100, 400, 200
+        )  # Set window dimensions (x, y, width, height)
 
         # Show the window
         self.show()
@@ -68,10 +75,12 @@ class BCHDesktopWallet(QWidget):
         self.receive_transaction_widget.setGeometry(200, 200, 500, 300)
         self.receive_transaction_widget.show()
 
+
 def main():
     app = QApplication(sys.argv)
     basic_app = BCHDesktopWallet()
     sys.exit(app.exec_())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

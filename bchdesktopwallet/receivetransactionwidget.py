@@ -1,6 +1,17 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QMessageBox, QTextEdit
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QVBoxLayout,
+    QLabel,
+    QListWidget,
+    QPushButton,
+    QHBoxLayout,
+    QMessageBox,
+    QTextEdit,
+)
 from bchdesktopwallet.localwalletman import LocalWalletManager
+
 
 class ReceiveTransactionWidget(QWidget):
     def __init__(self):
@@ -13,17 +24,17 @@ class ReceiveTransactionWidget(QWidget):
 
     def init_ui(self):
         # Widgets
-        self.label = QLabel('Receive Transaction')
-        self.wallet_list_label = QLabel('Select Wallet:')
+        self.label = QLabel("Receive Transaction")
+        self.wallet_list_label = QLabel("Select Wallet:")
         self.wallet_list_widget = QListWidget()
 
         self.refresh_wallet_list()
 
-        self.address_label = QLabel('Your Wallet Address:')
+        self.address_label = QLabel("Your Wallet Address:")
         self.address_display = QTextEdit()
         self.address_display.setReadOnly(True)
 
-        self.copy_button = QPushButton('Copy Address to Clipboard')
+        self.copy_button = QPushButton("Copy Address to Clipboard")
         self.copy_button.clicked.connect(self.copy_address_to_clipboard)
 
         # Layout
@@ -44,11 +55,13 @@ class ReceiveTransactionWidget(QWidget):
         # Get all wallets and add them to the list widget
         wallets = self.wallet_manager.get_wallets()
         for wallet in wallets:
-            address = wallet['address']
+            address = wallet["address"]
             self.wallet_list_widget.addItem(address)
 
         # Connect the item selection signal to the slot
-        self.wallet_list_widget.itemSelectionChanged.connect(self.handle_wallet_selection)
+        self.wallet_list_widget.itemSelectionChanged.connect(
+            self.handle_wallet_selection
+        )
 
     def handle_wallet_selection(self):
         # Get the selected item from the list widget
@@ -69,15 +82,20 @@ class ReceiveTransactionWidget(QWidget):
         QApplication.clipboard().setText(address_to_copy)
 
         # Show a success message
-        QMessageBox.information(self, 'Address Copied', 'Wallet address copied to clipboard!', QMessageBox.Ok)
+        QMessageBox.information(
+            self,
+            "Address Copied",
+            "Wallet address copied to clipboard!",
+            QMessageBox.Ok,
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     receive_transaction_widget = ReceiveTransactionWidget()
-    receive_transaction_widget.setWindowTitle('Receive Transaction')
+    receive_transaction_widget.setWindowTitle("Receive Transaction")
     receive_transaction_widget.setGeometry(100, 100, 400, 200)
     receive_transaction_widget.show()
 
     sys.exit(app.exec_())
-
