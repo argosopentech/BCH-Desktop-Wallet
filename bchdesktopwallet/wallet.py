@@ -68,8 +68,10 @@ class BCHDesktopWallet(QWidget):
         self.receive_transaction_widget.setGeometry(200, 200, 500, 300)
         self.receive_transaction_widget.show()
 
-
-if __name__ == '__main__':
+def main():
     app = QApplication(sys.argv)
     basic_app = BCHDesktopWallet()
     sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()

@@ -10,7 +10,7 @@ setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'bchdesktopwallet = bchdesktopwallet.wallet:main',
+            'bch-desktop-wallet = bchdesktopwallet.wallet:main',
         ],
     },
 )
