@@ -5,6 +5,7 @@ from bchdesktopwallet.managewalletswidget import ManageWalletsWidget
 from bchdesktopwallet.transactionwidget import TransactionWidget
 from bchdesktopwallet.viewbalanceswidget import ViewBalancesWidget
 from bchdesktopwallet.receivetransactionwidget import ReceiveTransactionWidget
+from bchdesktopwallet.privatekeyswidget import PrivateKeyViewer
 
 APPLICATION_NAME = "BCH Desktop Wallet"
 
@@ -30,6 +31,10 @@ class BCHDesktopWallet(QWidget):
         self.receive_transaction_button.clicked.connect(
             self.receive_transaction_button_clicked
         )
+        self.private_key_viewer_button = QPushButton("View Private Keys")
+        self.private_key_viewer_button.clicked.connect(
+            self.private_key_viewer_button_clicked
+        )
 
         # Create layout
         layout = QVBoxLayout()
@@ -38,6 +43,7 @@ class BCHDesktopWallet(QWidget):
         layout.addWidget(self.send_transaction_button)
         layout.addWidget(self.view_balances_button)
         layout.addWidget(self.receive_transaction_button)
+        layout.addWidget(self.private_key_viewer_button)
 
         # Set the layout for the main window
         self.setLayout(layout)
@@ -74,6 +80,12 @@ class BCHDesktopWallet(QWidget):
         self.receive_transaction_widget.setWindowTitle("Receive Transaction")
         self.receive_transaction_widget.setGeometry(200, 200, 500, 300)
         self.receive_transaction_widget.show()
+
+    def private_key_viewer_button_clicked(self):
+        self.private_key_viewer_widget = PrivateKeyViewer()
+        self.private_key_viewer_widget.setWindowTitle("View Private Keys")
+        self.private_key_viewer_widget.setGeometry(200, 200, 500, 300)
+        self.private_key_viewer_widget.show()
 
 
 def main():
