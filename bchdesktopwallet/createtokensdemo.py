@@ -31,7 +31,7 @@ class TokenMan:
         sleep(1)
 
         # Get transaction hash
-        txid = self.key.get_transactions()[0]
+        txid = self.key.get_unspents()
         print(f"Transaction hash: {txid}")
 
         # Wait for transaction to confirm
