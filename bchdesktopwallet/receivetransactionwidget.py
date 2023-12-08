@@ -1,3 +1,4 @@
+# receivetransactionwidget.py
 import sys
 from PyQt5.QtWidgets import (
     QApplication,
@@ -9,7 +10,9 @@ from PyQt5.QtWidgets import (
     QHBoxLayout,
     QMessageBox,
     QTextEdit,
+    QComboBox,
 )
+from bitcash import Key
 from bchdesktopwallet.localwalletman import LocalWalletManager
 
 
@@ -34,6 +37,13 @@ class ReceiveTransactionWidget(QWidget):
         self.address_display = QTextEdit()
         self.address_display.setReadOnly(True)
 
+        self.address_type_label = QLabel("Select Address Type:")
+        self.address_type_combobox = QComboBox()
+        self.address_type_combobox.addItems(["Bitcoin Cash (BCH)", "Bitcoin CashToken"])
+        self.address_type_combobox.currentIndexChanged.connect(
+            self.handle_address_type_change
+        )
+
         self.copy_button = QPushButton("Copy Address to Clipboard")
         self.copy_button.clicked.connect(self.copy_address_to_clipboard)
 
@@ -42,6 +52,8 @@ class ReceiveTransactionWidget(QWidget):
         layout.addWidget(self.label)
         layout.addWidget(self.wallet_list_label)
         layout.addWidget(self.wallet_list_widget)
+        layout.addWidget(self.address_type_label)
+        layout.addWidget(self.address_type_combobox)
         layout.addWidget(self.address_label)
         layout.addWidget(self.address_display)
         layout.addWidget(self.copy_button)
@@ -71,8 +83,30 @@ class ReceiveTransactionWidget(QWidget):
             # Get the address of the selected wallet
             selected_wallet_address = selected_item.text()
 
+            # Get the current index of the address type combo box
+            index = self.address_type_combobox.currentIndex()
+
+            # Update the displayed address based on the selected address type
+            private_key = self.wallet_manager.get_private_key(selected_wallet_address)
+            if private_key is not None:
+                if index == 1:  # Bitcoin CashToken selected
+                    key = Key.from_int(private_key)
+                    selected_wallet_address = key.cashtoken_address
+
             # Display the selected wallet address
             self.address_display.setPlainText(selected_wallet_address)
+
+    def handle_address_type_change(self, index):
+        # Update the displayed address based on the selected address type
+        selected_wallet_address = self.address_display.toPlainText()
+        private_key = self.wallet_manager.get_private_key(selected_wallet_address)
+
+        if private_key is not None:
+            if index == 1:  # Bitcoin CashToken selected
+                key = Key.from_int(private_key)
+                selected_wallet_address = key.cashtoken_address
+
+        self.address_display.setPlainText(selected_wallet_address)
 
     def copy_address_to_clipboard(self):
         # Get the current text from the address display
@@ -95,7 +129,7 @@ if __name__ == "__main__":
 
     receive_transaction_widget = ReceiveTransactionWidget()
     receive_transaction_widget.setWindowTitle("Receive Transaction")
-    receive_transaction_widget.setGeometry(100, 100, 400, 200)
+    receive_transaction_widget.setGeometry(100, 100, 400, 250)
     receive_transaction_widget.show()
 
     sys.exit(app.exec_())

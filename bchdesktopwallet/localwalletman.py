@@ -42,6 +42,12 @@ class LocalWalletManager:
                 return wallet
         return None
 
+    def get_private_key(self, address):
+        wallet = self.get_wallet_by_address(address)
+        if wallet:
+            return wallet["private_key"]
+        return None
+
 
 if __name__ == "__main__":
     # Example usage:
