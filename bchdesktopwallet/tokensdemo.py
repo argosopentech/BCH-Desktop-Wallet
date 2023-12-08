@@ -14,6 +14,7 @@ key = bitcash.Key.from_int(private_key)
 cashtoken_address = key.cashtoken_address
 
 # Get unspents
+# key.get_transactions()
 unspents = key.get_unspents()
 print(f"Unspents: {unspents}")
 
@@ -44,6 +45,7 @@ if send:
 
 balance = key.get_balance()
 print(f"Balance: {balance}")
+
 
 cashtoken_balance = key.cashtoken_balance
 print(f"Cashtoken Balance: {cashtoken_balance}")
