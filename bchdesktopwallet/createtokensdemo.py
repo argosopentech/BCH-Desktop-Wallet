@@ -2,6 +2,7 @@
 from time import sleep
 
 from bitcash import Key
+from bitcash.exceptions import InsufficientFunds
 
 import bchdesktopwallet.localwalletman as localwalletman
 
@@ -30,51 +31,26 @@ class TokenMan:
         sleep(1)
 
         # Get transaction hash
-        txid = self.key.get_transactions()[-1]
+        txid = self.key.get_transactions()[0]
         print(f"Transaction hash: {txid}")
 
         # Wait for transaction to confirm
-        sleep(10)
+        sleep(1)
 
-        # Broken
-        exit(1)
-        """
-        $ python bchdesktopwallet/createtokensdemo.py 
-Wallet: {'address': 'bitcoincash:qpx53qg7rtddxykfacrg9rfnqf0sdhtr9qzfyhecmh', 'private_key': 15842665189923097459977717756102871267576260263646752100155231323389051784997}
-Helper wallet funded.
-Unspent genesis created.
-Transaction hash: 081432467c2872767c0b66dd73419a29be8aa98101772ac82c1125f74e9655f0
-Traceback (most recent call last):
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/bchdesktopwallet/createtokensdemo.py", line 68, in <module>
-    tm.create_token("test", "tst", 1000)
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/bchdesktopwallet/createtokensdemo.py", line 40, in create_token
-    self.key.send(
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/env/lib/python3.10/site-packages/bitcash/wallet.py", line 372, in send
-    tx_hex = self.create_transaction(
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/env/lib/python3.10/site-packages/bitcash/wallet.py", line 305, in create_transaction
-    unspents, outputs = sanitize_tx_data(
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/env/lib/python3.10/site-packages/bitcash/transaction.py", line 180, in sanitize_tx_data
-    cashtoken.subtract_output(output)
-  File "/home/ipfactory/git/BCH-Desktop-Wallet/env/lib/python3.10/site-packages/bitcash/cashtoken.py", line 410, in subtract_output
-    raise InsufficientFunds("unspent category_id does not exist")
-bitcash.exceptions.InsufficientFunds: unspent category_id does not exist
-
-        """
-
-        # Create the token
         self.key.send(
             [
                 (
                     self.key.cashtoken_address,  # destination
-                    token_amount,  # amount
+                    5e4,  # amount
                     "satoshi",  # currency
-                    txid,  # category
+                    txid,  # category_id
                     "minting",  # NFT capability
                     None,  # NFT commitment, None
                     token_amount,  # fungible token amount
                 )
             ]
         )
+        print("Token created successfully.")
 
     def get_token_balance(self, token_name):
         return self.key.cashtoken_balance
