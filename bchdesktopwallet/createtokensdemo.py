@@ -8,13 +8,22 @@ class TokenMan:
         self.key = key
 
     def create_token(self, token_name, token_symbol, token_amount):
-        # Make a transaction to create a fresh unspent
-        # outputs = [(self.key.address, 0.01, "usd")]
-        # self.key.send(outputs)
+        # Create a helper wallet to create an unspent
+        helper_key = Key()
+        helper_address = helper_key.address
 
-        # Get the genesis unspent
-        unspents = self.key.get_unspents()
-        print(unspents)
+        # Fund the helper wallet with 1000 satoshis
+        outputs = [(helper_address, 1e4, "satoshi")]
+        self.key.send(outputs)
+        print("Helper wallet funded.")
+
+        # Send the 1000 satoshis back to the original wallet as an unspent genesis
+        outputs = [(self.key.address, int(1e4 * 0.9), "satoshi")]
+        helper_key.send(outputs)
+        print("Unspent genesis created.")
+
+        unspent = self.key.get_unspents()[-1]
+        print(unspent)
 
     def get_token_balance(self, token_name):
         return self.key.cashtoken_balance
