@@ -4,7 +4,9 @@ import bitcash
 # https://bitcash.dev/guide/cashtokens.html
 
 # Hardcoded for testing lol
-private_key = 35802989809929110344906770928891928395406747907426035337356610337891731325922
+private_key = (
+    35802989809929110344906770928891928395406747907426035337356610337891731325922
+)
 public_key = "bitcoincash:qrgfz9k93yp568jnlqwj47ufnkeu69tgpg4c8wvsf8"
 
 # Create a Key instance based on the private key
@@ -25,17 +27,19 @@ destination_address = cashtoken_address
 send = False
 
 if send:
-    key.send([
-        (
-            destination_address,  # destination
-            1000,  # amount
-            "satoshi",  # currency
-            category,  # category
-            "minting",  # NFT capability
-            None,  # NFT commitment, None
-            10000  # fungible token amount
-        )
-    ])
+    key.send(
+        [
+            (
+                destination_address,  # destination
+                1000,  # amount
+                "satoshi",  # currency
+                category,  # category
+                "minting",  # NFT capability
+                None,  # NFT commitment, None
+                10000,  # fungible token amount
+            )
+        ]
+    )
     print("Transaction sent!")
 
 balance = key.get_balance()
