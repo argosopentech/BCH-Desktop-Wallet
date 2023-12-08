@@ -1,6 +1,14 @@
 # BCH-Desktop-Wallet (Beta)
 Bitcoin Cash Wallet for the Linux Desktop
 
+### Features
+- Easy to customize
+- Uses the PyQt application framework
+- Create a wallet
+- Send Bitcoin Cash
+- Receive Bitcoin Cash
+- QR codes
+
 ## Quickstart
 ```
 git clone https://github.com/argosopentech/BCH-Desktop-Wallet.git
