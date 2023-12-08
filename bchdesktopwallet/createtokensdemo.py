@@ -12,18 +12,18 @@ class TokenMan:
         self.key = key
 
     def create_token(self, token_name, token_symbol, token_amount):
-        # Create a helper wallet to create an unspent
+        # Create a helper wallet to bounceback and create an unspent
         helper_key = Key()
         helper_address = helper_key.address
 
-        # Fund the helper wallet with 1000 satoshis
+        # Fund the helper wallet with 10000 satoshis
         outputs = [(helper_address, 1e5, "satoshi")]
         self.key.send(outputs)
         print("Helper wallet funded.")
 
         sleep(1)
 
-        # Send the 1000 satoshis back to the original wallet as an unspent genesis
+        # Send the satoshis back to the original wallet as an unspent genesis
         outputs = [(self.key.address, int(1e5 * 0.9), "satoshi")]
         helper_key.send(outputs)
         print("Unspent genesis created.")
