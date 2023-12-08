@@ -1,2 +1,3 @@
 bitcash
+qrcode
 PyQt5

@@ -2,6 +2,7 @@
 import sys
 
 from bitcash import Key
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import (
     QApplication,
     QComboBox,
@@ -49,6 +50,9 @@ class ReceiveTransactionWidget(QWidget):
         self.copy_button = QPushButton("Copy Address to Clipboard")
         self.copy_button.clicked.connect(self.copy_address_to_clipboard)
 
+        self.qr_code_label = QLabel()
+        self.qr_code_label.setAlignment(QtCore.Qt.AlignCenter)
+
         # Layout
         layout = QVBoxLayout()
         layout.addWidget(self.label)
@@ -59,6 +63,7 @@ class ReceiveTransactionWidget(QWidget):
         layout.addWidget(self.address_label)
         layout.addWidget(self.address_display)
         layout.addWidget(self.copy_button)
+        layout.addWidget(self.qr_code_label)
 
         self.setLayout(layout)
 
@@ -124,6 +129,33 @@ class ReceiveTransactionWidget(QWidget):
             "Wallet address copied to clipboard!",
             QMessageBox.Ok,
         )
+
+        # Display the QR code
+        self.display_qr_code(address_to_copy)
+
+    def display_qr_code(self, data):
+        from io import BytesIO
+
+        import qrcode
+        from PyQt5.QtGui import QPixmap
+
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(data)
+        qr.make(fit=True)
+
+        img = qr.make_image(fill_color="black", back_color="white")
+
+        buffer = BytesIO()
+        img.save(buffer)
+        qr_code_pixmap = QPixmap()
+        qr_code_pixmap.loadFromData(buffer.getvalue())
+
+        self.qr_code_label.setPixmap(qr_code_pixmap)
 
 
 if __name__ == "__main__":
