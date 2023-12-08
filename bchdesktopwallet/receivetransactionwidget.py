@@ -122,14 +122,6 @@ class ReceiveTransactionWidget(QWidget):
         # Copy the address to the clipboard
         QApplication.clipboard().setText(address_to_copy)
 
-        # Show a success message
-        QMessageBox.information(
-            self,
-            "Address Copied",
-            "Wallet address copied to clipboard!",
-            QMessageBox.Ok,
-        )
-
         # Display the QR code
         self.display_qr_code(address_to_copy)
 
