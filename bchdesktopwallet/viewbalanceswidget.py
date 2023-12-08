@@ -1,16 +1,18 @@
 import sys
+
+from bitcash import Key
 from PyQt5.QtWidgets import (
     QApplication,
-    QWidget,
-    QVBoxLayout,
+    QHBoxLayout,
     QLabel,
     QListWidget,
-    QPushButton,
-    QHBoxLayout,
     QMessageBox,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
 )
+
 from bchdesktopwallet.localwalletman import LocalWalletManager
-from bitcash import Key
 
 
 class ViewBalancesWidget(QWidget):

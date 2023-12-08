@@ -1,19 +1,21 @@
+import json
 import sys
+from pathlib import Path
+
+from bitcash import Key
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QClipboard
 from PyQt5.QtWidgets import (
     QApplication,
-    QWidget,
-    QVBoxLayout,
-    QListWidget,
-    QLabel,
-    QPushButton,
-    QHBoxLayout,
     QFileDialog,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtGui import QClipboard
-from PyQt5.QtCore import Qt
-from bitcash import Key
-from pathlib import Path
-import json
+
 from bchdesktopwallet.localwalletman import LocalWalletManager
 
 

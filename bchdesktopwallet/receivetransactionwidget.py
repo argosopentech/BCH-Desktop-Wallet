@@ -1,18 +1,20 @@
 # receivetransactionwidget.py
 import sys
+
+from bitcash import Key
 from PyQt5.QtWidgets import (
     QApplication,
-    QWidget,
-    QVBoxLayout,
+    QComboBox,
+    QHBoxLayout,
     QLabel,
     QListWidget,
-    QPushButton,
-    QHBoxLayout,
     QMessageBox,
+    QPushButton,
     QTextEdit,
-    QComboBox,
+    QVBoxLayout,
+    QWidget,
 )
-from bitcash import Key
+
 from bchdesktopwallet.localwalletman import LocalWalletManager
 
 

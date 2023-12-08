@@ -1,7 +1,9 @@
 # createtokensdemo.py
-import bchdesktopwallet.localwalletman as localwalletman
-from bitcash import Key
 from time import sleep
+
+from bitcash import Key
+
+import bchdesktopwallet.localwalletman as localwalletman
 
 
 class TokenMan:

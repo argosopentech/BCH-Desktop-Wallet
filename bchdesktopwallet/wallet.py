@@ -1,11 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
+
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget
+
 from bchdesktopwallet.localwalletman import LocalWalletManager
 from bchdesktopwallet.managewalletswidget import ManageWalletsWidget
+from bchdesktopwallet.privatekeyswidget import PrivateKeyViewer
+from bchdesktopwallet.receivetransactionwidget import ReceiveTransactionWidget
 from bchdesktopwallet.transactionwidget import TransactionWidget
 from bchdesktopwallet.viewbalanceswidget import ViewBalancesWidget
-from bchdesktopwallet.receivetransactionwidget import ReceiveTransactionWidget
-from bchdesktopwallet.privatekeyswidget import PrivateKeyViewer
 
 APPLICATION_NAME = "BCH Desktop Wallet"
 
