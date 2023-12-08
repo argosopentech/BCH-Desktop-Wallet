@@ -4,7 +4,8 @@ from bitcash import Key
 
 
 class LocalWalletManager:
-    def __init__(self, wallet_file_name="bch-wallet.json"):
+    def __init__(self):
+        wallet_file_name = "bch-wallet.json"
         self.wallet_file_path = (
             Path.home()
             / ".local"
