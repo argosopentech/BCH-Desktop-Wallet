@@ -128,6 +128,7 @@ class TransactionWidget(QWidget):
             key = Key.from_int(selected_wallet["private_key"])
 
             # Create a list of outputs
+            print(f"Recipient Address: {recipient_address}")
             outputs = [(recipient_address, amount, "usd")]
 
             # Send the transaction
