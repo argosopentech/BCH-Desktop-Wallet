@@ -129,7 +129,16 @@ class TransactionWidget(QWidget):
             outputs = [(recipient_address, amount, "usd")]
 
             # Send the transaction
-            transaction_id = key.send(outputs)
+            try:
+                transaction_id = key.send(outputs)
+            except ValueError as e:
+                QMessageBox.warning(
+                    self,
+                    "Transaction Error",
+                    f"Transaction failed: {e}",
+                    QMessageBox.Ok,
+                )
+                return
 
             # Show a success message
             QMessageBox.information(
