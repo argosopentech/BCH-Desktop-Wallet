@@ -12,6 +12,7 @@ class TokenMan:
         self.key = key
 
     def create_token(self, token_name, token_symbol, token_amount):
+        """
         # Create a helper wallet to bounceback and create an unspent
         helper_key = Key()
         helper_address = helper_key.address
@@ -33,15 +34,23 @@ class TokenMan:
         # Get transaction hash
         txid = self.key.get_unspents()
         print(f"Transaction hash: {txid}")
-
-        # Wait for transaction to confirm
-        sleep(1)
+        """
+        txid = None
+        unspents = self.key.get_unspents()
+        for unspent in unspents:
+            if unspent.txindex == 0:
+                txid = unspent.txid
+                break
+        if txid is None:
+            output = [(self.key.address, 546, "satoshi")]
+            txid = self.key.send(output, combine=False)
+            sleep(1)
 
         self.key.send(
             [
                 (
                     self.key.cashtoken_address,  # destination
-                    5e4,  # amount
+                    1000,  # amount
                     "satoshi",  # currency
                     txid,  # category_id
                     "minting",  # NFT capability
