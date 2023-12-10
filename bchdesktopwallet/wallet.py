@@ -1,7 +1,10 @@
 import sys
 
+import PyQt5.QtCore as QtCore
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget
 
+from bchdesktopwallet.dataman import DataManager
 from bchdesktopwallet.localwalletman import LocalWalletManager
 from bchdesktopwallet.managewalletswidget import ManageWalletsWidget
 from bchdesktopwallet.privatekeyswidget import PrivateKeyViewer
@@ -21,6 +24,13 @@ class BCHDesktopWallet(QWidget):
     def init_ui(self):
         # Create widgets
         self.label = QLabel("Bitcoin Cash Desktop Wallet")
+
+        # Create Bitcoin Cash Logo Image
+        self.bch_logo = QLabel()
+        self.bch_logo.setPixmap(QPixmap(str(DataManager.get_img_bch_logo())))
+        # Center the image
+        self.bch_logo.setAlignment(QtCore.Qt.AlignCenter)
+
         self.manage_wallets_button = QPushButton("Manage Wallets")
         self.manage_wallets_button.clicked.connect(self.manage_wallets_button_clicked)
         self.send_transaction_button = QPushButton("Send Transaction")
@@ -41,6 +51,7 @@ class BCHDesktopWallet(QWidget):
         # Create layout
         layout = QVBoxLayout()
         layout.addWidget(self.label)
+        layout.addWidget(self.bch_logo)
         layout.addWidget(self.manage_wallets_button)
         layout.addWidget(self.send_transaction_button)
         layout.addWidget(self.view_balances_button)
