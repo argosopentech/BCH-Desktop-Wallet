@@ -31,14 +31,14 @@ class BCHDesktopWallet(QWidget):
         # Center the image
         self.bch_logo.setAlignment(QtCore.Qt.AlignCenter)
 
+        self.view_balances_button = QPushButton("View Balances")
+        self.view_balances_button.clicked.connect(self.view_balances_button_clicked)
         self.manage_wallets_button = QPushButton("Manage Wallets")
         self.manage_wallets_button.clicked.connect(self.manage_wallets_button_clicked)
         self.send_transaction_button = QPushButton("Send Transaction")
         self.send_transaction_button.clicked.connect(
             self.send_transaction_button_clicked
         )
-        self.view_balances_button = QPushButton("View Balances")
-        self.view_balances_button.clicked.connect(self.view_balances_button_clicked)
         self.receive_transaction_button = QPushButton("Receive Transaction")
         self.receive_transaction_button.clicked.connect(
             self.receive_transaction_button_clicked
@@ -52,9 +52,9 @@ class BCHDesktopWallet(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.bch_logo)
+        layout.addWidget(self.view_balances_button)
         layout.addWidget(self.manage_wallets_button)
         layout.addWidget(self.send_transaction_button)
-        layout.addWidget(self.view_balances_button)
         layout.addWidget(self.receive_transaction_button)
         layout.addWidget(self.private_key_viewer_button)
 
