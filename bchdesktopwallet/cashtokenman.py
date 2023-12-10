@@ -1,8 +1,6 @@
-# createtokensdemo.py
 from time import sleep
 
 from bitcash import Key
-from bitcash.exceptions import InsufficientFunds
 
 import bchdesktopwallet.localwalletman as localwalletman
 
@@ -12,29 +10,6 @@ class TokenMan:
         self.key = key
 
     def create_token(self, token_name, token_symbol, token_amount):
-        """
-        # Create a helper wallet to bounceback and create an unspent
-        helper_key = Key()
-        helper_address = helper_key.address
-
-        # Fund the helper wallet with 10000 satoshis
-        outputs = [(helper_address, 1e5, "satoshi")]
-        self.key.send(outputs)
-        print("Helper wallet funded.")
-
-        sleep(1)
-
-        # Send the satoshis back to the original wallet as an unspent genesis
-        outputs = [(self.key.address, int(1e5 * 0.9), "satoshi")]
-        helper_key.send(outputs)
-        print("Unspent genesis created.")
-
-        sleep(1)
-
-        # Get transaction hash
-        txid = self.key.get_unspents()
-        print(f"Transaction hash: {txid}")
-        """
         txid = None
         unspents = self.key.get_unspents()
         for unspent in unspents:
@@ -61,11 +36,8 @@ class TokenMan:
         )
         print("Token created successfully.")
 
-    def get_token_balance(self, token_name):
+    def get_token_balance(self):
         return self.key.cashtoken_balance
-
-    def get_token_unspents(self, token_name):
-        return self.key.cashtoken_unspents
 
 
 # Demo if run as main
@@ -75,4 +47,9 @@ if __name__ == "__main__":
     wallet = wallets[0]
     print(f"Wallet: {wallet}")
     tm = TokenMan(Key.from_int(wallet["private_key"]))
-    tm.create_token("test", "tst", 1000)
+
+    tm.create_token("DoggyCash", "dogch", 1000)
+    # "Token created successfully."
+
+    print(f"Token Balance: {tm.get_token_balance()}")
+    # Token Balance: {'12d5637b7dac9cce41bebb2d59ba26bbff6ec6330036c2f8ca77d78545cd12a7': {'token_amount': 1000, 'nft': [{'capability': 'minting'}]}, '94b10ff15fbfc128f48bd551bfbf9123eade98a8619dc35055783faf8f8e7188': {'token_amount': 1000, 'nft': [{'capability': 'minting'}]}}
