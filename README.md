@@ -1,6 +1,14 @@
 # BCH-Desktop-Wallet (Beta)
 Bitcoin Cash Wallet for the Linux Desktop
 
+This desktop Bitcoin Cash wallet is built in Python using PyQt and the bitcash library.
+
+## Features
+- Create a wallet
+- Send and receive payment on the Bitcoin Cash blockchain
+- Non-custodial
+- Open Source (MIT)
+
 ![BCH Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bitcoin_Cash.png/240px-Bitcoin_Cash.png)
 
 ### Features
