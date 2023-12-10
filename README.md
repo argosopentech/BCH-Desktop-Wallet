@@ -1,6 +1,8 @@
 # BCH-Desktop-Wallet (Beta)
 Bitcoin Cash Wallet for the Linux Desktop
 
+![BCH Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bitcoin_Cash.png/240px-Bitcoin_Cash.png)
+
 ### Features
 - Easy to customize
 - Uses the PyQt application framework
