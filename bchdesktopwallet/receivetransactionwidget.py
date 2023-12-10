@@ -6,10 +6,8 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import (
     QApplication,
     QComboBox,
-    QHBoxLayout,
     QLabel,
     QListWidget,
-    QMessageBox,
     QPushButton,
     QTextEdit,
     QVBoxLayout,
