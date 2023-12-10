@@ -10,8 +10,6 @@ This desktop Bitcoin Cash wallet is built in Python using PyQt and the bitcash l
 - Send and receive payment on the Bitcoin Cash blockchain
 - Non-custodial
 - Open Source (MIT)
-
-### Features
 - Easy to customize
 - Uses the PyQt application framework
 - Create a wallet
