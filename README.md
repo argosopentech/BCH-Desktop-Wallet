@@ -27,3 +27,6 @@ bch-desktop-wallet
 #### Warning
 This application has not been extensively tested. Do not use it for large
 amounts of Bitcoin Cash.
+
+###### Donate
+bitcoincash:qzvpxe8y5kq45kahqkyv3p88sjrhlymj2v6xdrj3cv
